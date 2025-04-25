@@ -6,4 +6,8 @@ class BlogConfig(AppConfig):
     name = "blog"
 
     def ready(self):
-        import blog.signals
+        from utils.signals import register_image_cleanup
+        from blog.models import Article, ArticleComponent
+
+        register_image_cleanup(Article, "image")
+        register_image_cleanup(ArticleComponent, "image")
