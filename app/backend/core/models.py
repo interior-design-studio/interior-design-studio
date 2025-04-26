@@ -1,3 +1,4 @@
+import os.path
 import pathlib
 import uuid
 
@@ -6,7 +7,6 @@ from django.db import models
 from django.utils.text import slugify
 
 from core.validators import validate_number_phone
-from utils.image_utils import optimize_image_to_webp
 
 
 def project_main_image_path(project: "Project", filename: str) -> pathlib.Path:
@@ -74,7 +74,15 @@ class Project(models.Model):
         using=None,
         update_fields=None,
     ):
-        self.main_image = optimize_image_to_webp(self.main_image)
+
+        try:
+            old_instance = Project.objects.get(id=self.pk)
+            if old_instance.main_image and old_instance.main_image != self.main_image:
+                old_path = old_instance.main_image.path
+                if os.path.isfile(old_path):
+                    os.remove(old_path)
+        except Project.DoesNotExist:
+            pass
 
         return super().save(force_insert, force_update, using, update_fields)
 
@@ -98,7 +106,14 @@ class ProjectImage(models.Model):
         using=None,
         update_fields=None,
     ):
-        self.image = optimize_image_to_webp(self.image)
+        try:
+            old_instance = ProjectImage.objects.get(id=self.pk)
+            if old_instance.image and old_instance.image != self.image:
+                old_path = old_instance.image.path
+                if os.path.isfile(old_path):
+                    os.remove(old_path)
+        except ProjectImage.DoesNotExist:
+            pass
 
         return super().save(force_insert, force_update, using, update_fields)
 
