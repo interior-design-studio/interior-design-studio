@@ -1,10 +1,9 @@
+import os
 import pathlib
 import uuid
 
 from django.db import models
 from django.utils.text import slugify
-
-from utils.image_utils import optimize_image_to_webp
 
 
 def post_image_path(article: "Article", filename: str) -> pathlib.Path:
@@ -45,7 +44,14 @@ class Article(models.Model):
         using=None,
         update_fields=None,
     ):
-        self.image = optimize_image_to_webp(self.image)
+        try:
+            old_instance = Article.objects.get(id=self.pk)
+            if old_instance.image and old_instance.image != self.image:
+                old_path = old_instance.image.path
+                if os.path.isfile(old_path):
+                    os.remove(old_path)
+        except Article.DoesNotExist:
+            pass
 
         return super().save(force_insert, force_update, using, update_fields)
 
@@ -75,7 +81,14 @@ class ArticleComponent(models.Model):
             using=None,
             update_fields=None,
     ):
-        self.image = optimize_image_to_webp(self.image)
+        try:
+            old_instance = ArticleComponent.objects.get(id=self.pk)
+            if old_instance.image and old_instance.image != self.image:
+                old_path = old_instance.image.path
+                if os.path.isfile(old_path):
+                    os.remove(old_path)
+        except ArticleComponent.DoesNotExist:
+            pass
 
         return super().save(force_insert, force_update, using, update_fields)
 
