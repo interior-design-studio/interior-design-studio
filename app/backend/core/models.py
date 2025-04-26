@@ -1,4 +1,3 @@
-import os.path
 import pathlib
 import uuid
 
@@ -7,6 +6,7 @@ from django.db import models
 from django.utils.text import slugify
 
 from core.validators import validate_number_phone
+from utils.image_utils import OldImageDeletionMixin
 
 
 def project_main_image_path(project: "Project", filename: str) -> pathlib.Path:
@@ -48,7 +48,7 @@ class ProjectStyle(BaseNamedModel):
     pass
 
 
-class Project(models.Model):
+class Project(models.Model, OldImageDeletionMixin):
     name = models.CharField(max_length=255)
     short_description = models.CharField(max_length=255)
     full_description = models.TextField()
@@ -74,20 +74,12 @@ class Project(models.Model):
         using=None,
         update_fields=None,
     ):
-
-        try:
-            old_instance = Project.objects.get(id=self.pk)
-            if old_instance.main_image and old_instance.main_image != self.main_image:
-                old_path = old_instance.main_image.path
-                if os.path.isfile(old_path):
-                    os.remove(old_path)
-        except Project.DoesNotExist:
-            pass
+        self.delete_replaced_image(Project, "main_image")
 
         return super().save(force_insert, force_update, using, update_fields)
 
 
-class ProjectImage(models.Model):
+class ProjectImage(models.Model, OldImageDeletionMixin):
     project = models.ForeignKey(
         Project,
         on_delete=models.CASCADE,
@@ -106,14 +98,7 @@ class ProjectImage(models.Model):
         using=None,
         update_fields=None,
     ):
-        try:
-            old_instance = ProjectImage.objects.get(id=self.pk)
-            if old_instance.image and old_instance.image != self.image:
-                old_path = old_instance.image.path
-                if os.path.isfile(old_path):
-                    os.remove(old_path)
-        except ProjectImage.DoesNotExist:
-            pass
+        self.delete_replaced_image(ProjectImage, "image")
 
         return super().save(force_insert, force_update, using, update_fields)
 
