@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     "debug_toolbar",
     "drf_spectacular",
     "nested_admin",
+    "consultations",
     "core",
     "blog",
     "user",
