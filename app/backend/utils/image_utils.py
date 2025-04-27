@@ -3,8 +3,10 @@ from PIL import Image
 from io import BytesIO
 
 from django import forms
+from django.db import models
 from django.core.files.base import ContentFile
 from django.db.models.fields.files import ImageFieldFile
+from django.utils.html import format_html
 
 
 def optimize_image_to_webp(image: ImageFieldFile) -> ContentFile:
@@ -17,6 +19,13 @@ def optimize_image_to_webp(image: ImageFieldFile) -> ContentFile:
 
     output.seek(0)
     return ContentFile(output.read(), image.name.split('.')[0] + '.webp')
+
+
+def preview_display(obj: models.Model, field_name: str) -> str:
+    field = getattr(obj, field_name, None)
+    if field and hasattr(field, 'url'):
+        return format_html('<img src="{}" style="max-height: 200px;" />', field.url)
+    return "-"
 
 
 class OldImageDeletionMixin:
