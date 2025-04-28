@@ -45,3 +45,11 @@ class ConsultationRequest(models.Model):
 
     def __str__(self) -> str:
         return f"{self.customer_name} {self.created_at.date()}"
+
+
+class SurveyAnswer(models.Model):
+    consultation = models.OneToOneField(
+        "ConsultationRequest",
+        on_delete=models.CASCADE,
+        related_name="survey_answer"
+    )
