@@ -5,7 +5,7 @@ from consultations.validators import validate_number_phone
 
 
 class Question(models.Model):
-    order = models.PositiveIntegerField()
+    order = models.PositiveIntegerField(unique=True)
     text = models.CharField(max_length=255)
     is_protected = models.BooleanField(default=False)
 
@@ -14,6 +14,13 @@ class Question(models.Model):
 
     def __str__(self) -> str:
         return self.text
+
+    def delete(self, using=None, keep_parents=False):
+        if self.is_protected:
+            raise models.ProtectedError(
+                "The question is protected and cannot be deleted.", self
+            )
+        super().delete(using, keep_parents)
 
 
 class ChoiceOption(models.Model):
@@ -26,7 +33,13 @@ class ChoiceOption(models.Model):
     text = models.CharField(max_length=255)
 
     class Meta:
-        ordering = ["question"]
+        ordering = ["question__order", "order"]
+        constraints = [
+            models.UniqueConstraint(
+                fields=["question", "order"],
+                name="unique_choice_order"
+            )
+        ]
 
     def __str__(self) -> str:
         return f"q:{self.question.order} {self.text}"
@@ -65,7 +78,7 @@ class ChosenAnswer(models.Model):
     option = models.ForeignKey(
         ChoiceOption,
         on_delete=models.PROTECT,
-        related_name="chosen_answers",
+        related_name="chosen_by_users",
         null=True,
         blank=True
     )
@@ -74,6 +87,9 @@ class ChosenAnswer(models.Model):
         null=True,
         blank=True
     )
+
+    class Meta:
+        ordering = ["option"]
 
     def clean(self):
         if not self.option and not self.custom_answer:
