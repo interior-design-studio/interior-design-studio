@@ -5,7 +5,6 @@ from django.core.validators import MinValueValidator
 from django.db import models
 from django.utils.text import slugify
 
-from core.validators import validate_number_phone
 from utils.image_utils import OldImageDeletionMixin
 
 
@@ -130,19 +129,3 @@ class ProjectConfiguration(models.Model):
 
     def __str__(self) -> str:
         return f"{self.name} ({self.price} USD)"
-
-
-class Consultation(models.Model):
-    customer_name = models.CharField(max_length=255)
-    phone_number = models.CharField(
-        max_length=15, validators=[validate_number_phone]
-    )
-    question = models.TextField(null=True, blank=True)
-    is_active = models.BooleanField(default=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-
-    class Meta:
-        ordering = ["-is_active", "-created_at"]
-
-    def __str__(self) -> str:
-        return f"{self.customer_name} - {self.created_at.date()}"
