@@ -50,7 +50,7 @@ class ConsultationRequest(models.Model):
     phone_number = models.CharField(
         max_length=15, validators=[validate_number_phone]
     )
-    question = models.TextField(null=True, blank=True)
+    customer_question = models.TextField(null=True, blank=True)
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
@@ -61,17 +61,9 @@ class ConsultationRequest(models.Model):
         return f"{self.customer_name} {self.created_at.date()}"
 
 
-class SurveyAnswer(models.Model):
-    consultation = models.OneToOneField(
-        "ConsultationRequest",
-        on_delete=models.CASCADE,
-        related_name="survey_answer"
-    )
-
-
 class ChosenAnswer(models.Model):
-    survey_answer = models.ForeignKey(
-        SurveyAnswer,
+    customer_data = models.ForeignKey(
+        ConsultationRequest,
         on_delete=models.CASCADE,
         related_name="chosen_answers"
     )
@@ -79,6 +71,13 @@ class ChosenAnswer(models.Model):
         ChoiceOption,
         on_delete=models.PROTECT,
         related_name="chosen_by_users",
+        null=True,
+        blank=True
+    )
+    question = models.ForeignKey(
+        Question,
+        on_delete=models.PROTECT,
+        related_name="custom_answers",
         null=True,
         blank=True
     )
@@ -95,6 +94,10 @@ class ChosenAnswer(models.Model):
         if not self.option and not self.custom_answer:
             raise ValidationError(
                 "You must select an option or provide a custom answer."
+            )
+        if self.custom_answer and not self.question:
+            raise ValidationError(
+                "You must select a question if you are providing a custom answer."
             )
 
     def __str__(self):
