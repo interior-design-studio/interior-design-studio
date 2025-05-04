@@ -3,9 +3,12 @@ from smtplib import SMTPException
 from drf_spectacular.utils import extend_schema
 from rest_framework import generics
 
-from consultations.models import ConsultationRequest
+from consultations.models import ConsultationRequest, Question
 from consultations.notifications import send_admin_consultation_notification
-from consultations.serializers import ConsultationRequestSerializer
+from consultations.serializers import (
+    ConsultationRequestSerializer,
+    QuestionListSerializer
+)
 
 
 @extend_schema(
@@ -31,3 +34,8 @@ class ConsultationCreateView(generics.CreateAPIView):
             )
         except SMTPException:
             pass
+
+
+class QuestionListView(generics.ListAPIView):
+    queryset = Question.objects.prefetch_related("choices")
+    serializer_class = QuestionListSerializer
