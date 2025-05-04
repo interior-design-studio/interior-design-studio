@@ -8,8 +8,7 @@ from core.models import (
     ProjectStyle,
     ProjectImage,
     Service,
-    ProjectConfiguration,
-    Consultation,
+    ProjectConfiguration
 )
 
 
@@ -17,8 +16,6 @@ admin.site.register(Tag)
 admin.site.register(ProjectStyle)
 admin.site.register(Service)
 admin.site.register(ProjectConfiguration)
-admin.site.register(Consultation)
-
 
 class ImageInline(admin.TabularInline):
     model = ProjectImage

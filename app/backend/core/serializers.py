@@ -4,8 +4,7 @@ from core.models import (
     Tag,
     ProjectStyle,
     Project,
-    ProjectConfiguration,
-    Consultation,
+    ProjectConfiguration
 )
 
 
@@ -72,9 +71,3 @@ class ProjectConfigurationSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProjectConfiguration
         fields = ("id", "name", "price", "min_price", "services")
-
-
-class ConsultationSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Consultation
-        fields = ("customer_name", "phone_number", "question")
