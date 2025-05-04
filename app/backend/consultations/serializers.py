@@ -1,7 +1,27 @@
 from rest_framework import serializers
 from django.db import transaction
 
-from consultations.models import ConsultationRequest, ChosenAnswer
+from consultations.models import (
+    ConsultationRequest,
+    ChosenAnswer,
+    Question,
+    ChoiceOption
+)
+
+
+class ChoiceOptionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ChoiceOption
+        fields = ("id", "order", "text")
+
+
+
+class QuestionListSerializer(serializers.ModelSerializer):
+    choices = ChoiceOptionSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Question
+        fields = ("id", "order", "text", "is_protected", "choices")
 
 
 class ChosenAnswerSerializer(serializers.ModelSerializer):
