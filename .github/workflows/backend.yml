@@ -1,10 +1,12 @@
 name: Build and Push Backend
 
 on:
+  issue_comment:
+    types: [created, deleted]
   push:
     branches: [develop]
     paths:
-      - 'app/backend/*'
+      - 'app/backend/**'
 
 jobs:
   build:
