@@ -5,10 +5,9 @@ on:
   issue_comment:
     types: [created, deleted]
 
-  push:
-    branches: [develop]
-    paths:
-      - 'app/backend/**
+  # branches: [develop]
+  # paths:
+  # - 'app/backend/**'
 
 jobs:
   build:
