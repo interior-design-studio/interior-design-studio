@@ -39,7 +39,7 @@ jobs:
           repository: interior-design-studio/interior-design-infra
           token: ${{ secrets.GH_INFRA_PAT }}
           path: infra
-  
+
       - name: Update values.yaml with new tag
         run: |
           cd infra/terraform/helm/django
