@@ -24,12 +24,12 @@ jobs:
 
       - name: Build and Push
         run: |
-          docker build -t $IMAGE_NAME:${{ env.TAG }} ./app/backend
-          docker push $IMAGE_NAME:${{ env.TAG }}
+          docker build -t ${{env.IMAGE_NAME}}:${{ env.TAG }} ./app/backend
+          docker push ${{env.IMAGE_NAME}}:${{ env.TAG }}
 
       - name: Output tag
         run:  |
-          echo "Pushed image: $IMAGE_NAME:${{ env.TAG }}"
+          echo "Pushed image: ${{env.IMAGE_NAME}}:${{ env.TAG }}"
       - name: Checkout infra repo
         uses: actions/checkout@v3
         with:
