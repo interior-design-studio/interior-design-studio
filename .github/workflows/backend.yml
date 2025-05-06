@@ -63,4 +63,4 @@ jobs:
           commit-message: Update backend image tag to ${{ env.TAG }}
           title: "Update backend image tag to ${{ env.TAG }}"
           body: "This PR updates the backend image tag to `${{ env.TAG }}`."
-          base: develop
+          base: main
