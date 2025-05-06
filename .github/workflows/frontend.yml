@@ -1,0 +1,29 @@
+name: Build and Push Frontend
+
+on:
+  push:
+    branches: [develop]
+    paths:
+      - 'app/frontend/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Log in to DockerHub
+        run: echo "${{ secrets.DOCKERHUB_PASSWORD }}" | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
+
+      - name: Set Git SHA as image tag
+        run: echo "TAG=$(echo $GITHUB_SHA | cut -c1-7)" >> $GITHUB_ENV
+
+      - name: Build and Push
+        run: |
+          docker build -t $IMAGE_NAME:${{ env.TAG }} ./app/frontend
+          docker push $IMAGE_NAME:${{ env.TAG }}
+
+      - name: Output tag
+        run:  |
+          echo "Pushed image: $IMAGE_NAME:${{ env.TAG }}"

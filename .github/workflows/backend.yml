@@ -1,0 +1,60 @@
+name: Build and Push Backend
+
+on:
+  push:
+    branches: [develop]
+    paths:
+      - 'app/backend/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Log in to DockerHub
+        run: echo "${{ secrets.DOCKERHUB_PASSWORD }}" | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
+
+      - name: Set Git SHA as image tag
+        run: echo "TAG=$(echo $GITHUB_SHA | cut -c1-7)" >> $GITHUB_ENV
+
+      - name: Build and Push
+        run: |
+          docker build -t $IMAGE_NAME:${{ env.TAG }} ./app/backend
+          docker push $IMAGE_NAME:${{ env.TAG }}
+
+      - name: Output tag
+        run:  |
+          echo "Pushed image: $IMAGE_NAME:${{ env.TAG }}"
+      - name: Checkout infra repo
+        uses: actions/checkout@v3
+        with:
+          repository: interior-design-studio/interior-design-infra
+          token: ${{ secrets.GH_INFRA_PAT }}
+          path: infra
+  
+      - name: Update values.yaml with new tag
+        run: |
+          cd terraform/helm/django
+          sed -i "s/^  tag: .*/  tag: ${TAG}/" values.yaml
+
+      - name: Commit and push changes
+        run: |
+          cd infra
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git checkout -b update-backend-image-${TAG}
+          git add helm/django/values.yaml
+          git commit -m "Update backend image tag to ${TAG}"
+          git push origin update-backend-image-${TAG}
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.GH_INFRA_PAT }}
+          path: infra
+          commit-message: Update backend image tag to ${{ env.TAG }}
+          title: "Update backend image tag to ${{ env.TAG }}"
+          body: "This PR updates the backend image tag to `${{ env.TAG }}`."
+          base: develop
