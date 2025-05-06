@@ -42,7 +42,7 @@ jobs:
   
       - name: Update values.yaml with new tag
         run: |
-          cd terraform/helm/django/
+          cd helm/django/
           sed -i "s/^  tag: .*/  tag: ${TAG}/" values.yaml
 
       - name: Commit and push changes
