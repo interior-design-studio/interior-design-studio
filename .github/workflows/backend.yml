@@ -51,7 +51,7 @@ jobs:
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
           git checkout -b update-backend-image-${TAG}
-          git add helm/django/values.yaml
+          git add terraform/helm/django/values.yaml
           git commit -m "Update backend image tag to ${TAG}"
           git push origin update-backend-image-${TAG}
 
