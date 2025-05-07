@@ -38,7 +38,7 @@ jobs:
         with:
           repository: interior-design-studio/interior-design-infra
           token: ${{ secrets.GH_INFRA_PAT }}
-          path: infra-frontend
+          path: infra
 
       - name: Update values.yaml with new tag
         run: |
