@@ -1,12 +1,13 @@
 name: Build and Push Frontend
 
-# on:
-  # push:
+on:
+  push:
   # issue_comment:
   #   types: [created, deleted]
-    # branches: [develop]
-    # paths:
-    #   - 'app/frontend/**'
+    paths:
+      - 'app/frontend/**'
+    branches: [develop]
+
 
 jobs:
   build:
