@@ -7,7 +7,7 @@ RUN npm run build
 
 # # Production stage
 FROM nginx:stable-alpine
-COPY --from=builder /app/build /usr/share/nginx/html
+COPY --from=builder /app/frontend/build /usr/share/nginx/html
 
 # # Optional: overwrite default Nginx config
 COPY nginx.conf /etc/nginx/conf.d/default.conf
