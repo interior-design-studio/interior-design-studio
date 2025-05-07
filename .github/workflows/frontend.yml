@@ -38,17 +38,11 @@ jobs:
         with:
           repository: interior-design-studio/interior-design-infra
           token: ${{ secrets.GH_INFRA_PAT }}
-          path: infra
+          path: infra-frontend
 
       - name: Update values.yaml with new tag
         run: |
-          cd infra/
-          cd terraform/
-          cd helm/
-          ls
-          cd frontend/
-          pwd
-          ls
+          cd infra/terraform/helm/frontend
           sed -i "s/^  tag: .*/  tag: ${TAG}/" values.yaml
 
       - name: Commit and push changes
