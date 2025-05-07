@@ -1,4 +1,6 @@
 from django.contrib import admin
+from django.contrib import messages
+from django.db.models import ProtectedError
 
 from consultations.models import (
     ConsultationRequest,
@@ -40,3 +42,37 @@ class ConsultationRequestAdmin(admin.ModelAdmin):
         "created_at"
     )
     list_filter = ("is_active",)
+
+
+@admin.register(Question)
+class QuestionAdmin(admin.ModelAdmin):
+    list_display_links = ("text",)
+    list_display = ("order", "text", "is_protected")
+    list_filter = ("is_protected",)
+    readonly_fields = ("is_protected",)
+
+    def delete_model(self, request, obj):
+        try:
+            obj.delete()
+        except ProtectedError:
+            self.message_user(
+                request,
+                "The question is protected and cannot be deleted.",
+                level=messages.ERROR
+            )
+
+    def get_actions(self, request):
+        actions = super().get_actions(request)
+        if "delete_selected" in actions:
+            del actions["delete_selected"]
+        return actions
+
+    def get_readonly_fields(self, request, obj=None):
+        if obj and obj.is_protected:
+            self.readonly_fields = ("order", "text", "is_protected")
+        return self.readonly_fields
+
+    def has_delete_permission(self, request, obj=None):
+        if obj and obj.is_protected:
+            return False
+        return super().has_delete_permission(request, obj)
