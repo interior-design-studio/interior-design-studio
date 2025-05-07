@@ -41,8 +41,21 @@ class ChoiceOption(models.Model):
             )
         ]
 
+    def clean(self):
+        if self.pk and self.question.is_protected:
+            orig = ChoiceOption.objects.get(id=self.pk)
+            if orig.text != self.text or orig.order != self.order:
+                raise ValidationError("Cannot modify choices of a protected question.")
+
+        if not self.pk and self.question.is_protected:
+            raise ValidationError("Cannot add choices to a protected question.")
+
+    def delete(self, using=None, keep_parents=False):
+        if self.question.is_protected:
+            raise ValidationError("Cannot delete choices from a protected question.")
+
     def __str__(self) -> str:
-        return f"q:{self.question.order} {self.text}"
+        return f"{self.text}"
 
 
 class ConsultationRequest(models.Model):
