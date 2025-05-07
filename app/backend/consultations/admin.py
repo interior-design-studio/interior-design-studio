@@ -44,8 +44,29 @@ class ConsultationRequestAdmin(admin.ModelAdmin):
     list_filter = ("is_active",)
 
 
+class ChoiceOptionInline(admin.TabularInline):
+    model = ChoiceOption
+    extra = 0
+
+    def get_readonly_fields(self, request, obj=None):
+        if obj and obj.is_protected:
+            self.readonly_fields = ("order", "text")
+        return self.readonly_fields
+
+    def has_add_permission(self, request, obj):
+        if obj and obj.is_protected:
+            return False
+        return super().has_add_permission(request, obj)
+
+    def has_delete_permission(self, request, obj=None):
+        if obj and obj.is_protected:
+            return False
+        return super().has_delete_permission(request, obj)
+
+
 @admin.register(Question)
 class QuestionAdmin(admin.ModelAdmin):
+    inlines = (ChoiceOptionInline,)
     list_display_links = ("text",)
     list_display = ("order", "text", "is_protected")
     list_filter = ("is_protected",)
