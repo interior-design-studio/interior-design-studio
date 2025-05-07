@@ -42,7 +42,10 @@ jobs:
 
       - name: Update values.yaml with new tag
         run: |
-          # cd infra/terraform/helm/frontend
+          cd infra/
+          cd terraform/
+          cd helm/
+          cd frontend
           pwd
           ls
           sed -i "s/^  tag: .*/  tag: ${TAG}/" values.yaml
