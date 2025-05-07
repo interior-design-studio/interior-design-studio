@@ -31,7 +31,6 @@ jobs:
           docker push $IMAGE_NAME:${{ env.TAG }}
 
       - name: Output tag
-        working-directory: app/frontend
         run:  |
           echo "Pushed image: $IMAGE_NAME:${{ env.TAG }}"
 
@@ -47,7 +46,7 @@ jobs:
         env:
           TAG: ${{ env.TAG }}
         run: |
-          cd infra/terraform/helm/frontend
+          # cd infra/terraform/helm/frontend
           sed -i "s/^  tag: .*/  tag: $TAG/" infra/terraform/helm/frontend/values.yaml
 
       - name: Commit and push changes
