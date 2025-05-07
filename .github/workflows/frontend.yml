@@ -45,7 +45,8 @@ jobs:
           cd infra/
           cd terraform/
           cd helm/
-          cd frontend
+          ls
+          cd frontend/
           pwd
           ls
           sed -i "s/^  tag: .*/  tag: ${TAG}/" values.yaml
