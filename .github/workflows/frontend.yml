@@ -43,12 +43,12 @@ jobs:
           path: infra
 
       - name: Update values.yaml with new tag
-        working-directory: infra/terraform/helm/frontend
+        working-directory: .
         env:
           TAG: ${{ env.TAG }}
         run: |
           cd infra/terraform/helm/frontend
-          sed -i "s/^  tag: .*/  tag: $TAG/" values.yaml
+          sed -i "s/^  tag: .*/  tag: $TAG/" infra/terraform/helm/frontend/values.yaml
 
       - name: Commit and push changes
         run: |
