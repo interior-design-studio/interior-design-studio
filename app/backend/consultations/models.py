@@ -15,6 +15,12 @@ class Question(models.Model):
     def __str__(self) -> str:
         return self.text
 
+    def clean(self):
+        if self.pk and self.is_protected:
+            orig = Question.objects.get(id=self.pk)
+            if orig.text != self.text or orig.order != self.order:
+                raise ValidationError("Cannot modify protected question fields")
+
     def delete(self, using=None, keep_parents=False):
         if self.is_protected:
             raise models.ProtectedError(
