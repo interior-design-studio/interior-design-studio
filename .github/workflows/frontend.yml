@@ -1,6 +1,6 @@
 name: Build and Push Frontend
 
-on:
+# on:
   # push:
   # issue_comment:
   #   types: [created, deleted]

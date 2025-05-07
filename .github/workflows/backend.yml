@@ -1,9 +1,9 @@
 name: Build and Push Backend
 
-on:
-  push:
-  issue_comment:
-    types: [created, deleted]
+# on:
+#   push:
+#   issue_comment:
+#     types: [created, deleted]
 
   # branches: [develop]
   # paths:
