@@ -1,6 +1,4 @@
 from django.contrib import admin
-from django.contrib import messages
-from django.db.models import ProtectedError
 
 from consultations.models import (
     ConsultationRequest,
@@ -71,16 +69,6 @@ class QuestionAdmin(admin.ModelAdmin):
     list_display = ("order", "text", "is_protected")
     list_filter = ("is_protected",)
     readonly_fields = ("is_protected",)
-
-    def delete_model(self, request, obj):
-        try:
-            obj.delete()
-        except ProtectedError:
-            self.message_user(
-                request,
-                "The question is protected and cannot be deleted.",
-                level=messages.ERROR
-            )
 
     def get_actions(self, request):
         actions = super().get_actions(request)
