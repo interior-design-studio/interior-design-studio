@@ -25,7 +25,7 @@ jobs:
 
       - name: Build and Push
         run: |
-          docker build -t $IMAGE_NAME:${{ env.TAG }} -f ./app/frontend/Dockerfile.frontend ./app/frontend
+          docker build -t $IMAGE_NAME:${{ env.TAG }} -f app/frontend/Dockerfile.frontend ./app/frontend
           docker push $IMAGE_NAME:${{ env.TAG }}
 
       - name: Output tag
