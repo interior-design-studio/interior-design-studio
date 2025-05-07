@@ -32,13 +32,14 @@ jobs:
       - name: Output tag
         run:  |
           echo "Pushed image: $IMAGE_NAME:${{ env.TAG }}"
-          - name: Checkout infra repo
-          uses: actions/checkout@v3
-          with:
-            repository: interior-design-studio/interior-design-infra
-            token: ${{ secrets.GH_INFRA_PAT }}
-            path: infra
-  
+
+      - name: Checkout infra repo
+        uses: actions/checkout@v3
+        with:
+          repository: interior-design-studio/interior-design-infra
+          token: ${{ secrets.GH_INFRA_PAT }}
+          path: infra
+
       - name: Update values.yaml with new tag
         run: |
           cd infra/terraform/helm/frontend
