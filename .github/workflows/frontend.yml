@@ -13,6 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       IMAGE_NAME: tavrds/interior-design-frontend
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -30,6 +31,7 @@ jobs:
           docker push $IMAGE_NAME:${{ env.TAG }}
 
       - name: Output tag
+        working-directory: app/frontend
         run:  |
           echo "Pushed image: $IMAGE_NAME:${{ env.TAG }}"
 
@@ -41,11 +43,12 @@ jobs:
           path: infra
 
       - name: Update values.yaml with new tag
-        env:
-          TAG: ${{ env.TAG }}
+        # working-directory: .
+        # env:
+        #   TAG: ${{ env.TAG }}
         run: |
           cd infra/terraform/helm/frontend
-          sed -i "s/^  tag: .*/  tag: $TAG/" values.yaml
+          sed -i "s/^  tag: .*/  tag: ${TAG}/" values.yaml
 
       - name: Commit and push changes
         run: |
