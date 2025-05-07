@@ -2,12 +2,12 @@
 FROM node:18-alpine as builder
 WORKDIR /app
 COPY . .
-RUN npm ci
+RUN npm install
 RUN npm run build
 
 # # Production stage
 FROM nginx:stable-alpine
-COPY --from=build /app/build /usr/share/nginx/html
+COPY --from=builder /app/build /usr/share/nginx/html
 
 # # Optional: overwrite default Nginx config
 COPY nginx.conf /etc/nginx/conf.d/default.conf
