@@ -2,15 +2,24 @@ from django.contrib import admin
 
 from consultations.models import (
     ConsultationRequest,
-    SurveyAnswer,
     ChosenAnswer,
     ChoiceOption,
     Question
 )
 
 
-admin.site.register(ConsultationRequest)
-admin.site.register(SurveyAnswer)
-admin.site.register(ChosenAnswer)
-admin.site.register(ChoiceOption)
-admin.site.register(Question)
+@admin.register(ConsultationRequest)
+class ConsultationRequestAdmin(admin.ModelAdmin):
+    list_display = (
+        "customer_name",
+        "phone_number",
+        "created_at",
+        "is_active"
+    )
+    readonly_fields = (
+        "customer_name",
+        "phone_number",
+        "customer_question",
+        "created_at"
+    )
+    list_filter = ("is_active",)
