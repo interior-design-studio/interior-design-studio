@@ -43,7 +43,7 @@ jobs:
           path: infra
 
       - name: Update values.yaml with new tag
-        # working-directory: .
+        working-directory: .
         # env:
         #   TAG: ${{ env.TAG }}
         run: |
