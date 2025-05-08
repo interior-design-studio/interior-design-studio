@@ -1,12 +1,10 @@
-from datetime import datetime
-
 from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
 from django.conf import settings
 
 
 def send_admin_consultation_notification(
-        name: str, number_phone: str, created_at: datetime, question: str | None = None
+        name: str, number_phone: str, created_at: str, question: str | None = None
 ) -> None:
     subject = "Запит на консультацію."
     to_email = settings.ADMIN_NOTIFICATION_EMAIL
@@ -17,7 +15,7 @@ def send_admin_consultation_notification(
             "name": name,
             "number_phone": number_phone,
             "question": question,
-            "created_at": created_at.strftime("%d.%m.%Y %H:%M")
+            "created_at": created_at
         }
     )
 

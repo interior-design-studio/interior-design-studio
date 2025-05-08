@@ -1,14 +1,12 @@
-from smtplib import SMTPException
-
 from drf_spectacular.utils import extend_schema
 from rest_framework import generics
 
 from consultations.models import ConsultationRequest, Question
-from consultations.notifications import send_admin_consultation_notification
 from consultations.serializers import (
     ConsultationRequestSerializer,
     QuestionListSerializer
 )
+from consultations.tasks import send_message_task
 
 
 @extend_schema(
@@ -25,16 +23,12 @@ class ConsultationCreateView(generics.CreateAPIView):
     def perform_create(self, serializer):
         consultation = serializer.save()
 
-        try:
-            send_admin_consultation_notification(
-                name=consultation.customer_name,
-                number_phone=consultation.phone_number,
-                created_at=consultation.created_at,
-                question=consultation.customer_question
-            )
-        except SMTPException:
-            pass
-
+        send_message_task.delay(
+            name=consultation.customer_name,
+            number_phone=consultation.phone_number,
+            created_at=consultation.created_at.strftime("%d.%m.%Y %H:%M"),
+            question=consultation.customer_question
+        )
 
 class QuestionListView(generics.ListAPIView):
     queryset = Question.objects.prefetch_related("choices")
