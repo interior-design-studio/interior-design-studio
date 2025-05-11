@@ -3,7 +3,7 @@ LABEL maintainer="danilsivkovic@gmail.com"
 
 ENV PYTHONUNBUFFERED 1
 
-WORKDIR app/
+WORKDIR app/backend
 
 COPY app/backend/requirements.txt requirements.txt
 RUN pip install -r requirements.txt
