@@ -5,8 +5,7 @@ from django.core.validators import MinValueValidator
 from django.db import models
 from django.utils.text import slugify
 
-from core.validators import validate_number_phone
-from utils.image_utils import optimize_image_to_webp
+from utils.image_utils import OldImageDeletionMixin
 
 
 def project_main_image_path(project: "Project", filename: str) -> pathlib.Path:
@@ -48,7 +47,7 @@ class ProjectStyle(BaseNamedModel):
     pass
 
 
-class Project(models.Model):
+class Project(models.Model, OldImageDeletionMixin):
     name = models.CharField(max_length=255)
     short_description = models.CharField(max_length=255)
     full_description = models.TextField()
@@ -74,12 +73,12 @@ class Project(models.Model):
         using=None,
         update_fields=None,
     ):
-        self.main_image = optimize_image_to_webp(self.main_image)
+        self.delete_replaced_image(Project, "main_image")
 
         return super().save(force_insert, force_update, using, update_fields)
 
 
-class ProjectImage(models.Model):
+class ProjectImage(models.Model, OldImageDeletionMixin):
     project = models.ForeignKey(
         Project,
         on_delete=models.CASCADE,
@@ -98,7 +97,7 @@ class ProjectImage(models.Model):
         using=None,
         update_fields=None,
     ):
-        self.image = optimize_image_to_webp(self.image)
+        self.delete_replaced_image(ProjectImage, "image")
 
         return super().save(force_insert, force_update, using, update_fields)
 
@@ -130,19 +129,3 @@ class ProjectConfiguration(models.Model):
 
     def __str__(self) -> str:
         return f"{self.name} ({self.price} USD)"
-
-
-class Consultation(models.Model):
-    customer_name = models.CharField(max_length=255)
-    phone_number = models.CharField(
-        max_length=15, validators=[validate_number_phone]
-    )
-    question = models.TextField(null=True, blank=True)
-    is_active = models.BooleanField(default=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-
-    class Meta:
-        ordering = ["-is_active", "-created_at"]
-
-    def __str__(self) -> str:
-        return f"{self.customer_name} - {self.created_at.date()}"

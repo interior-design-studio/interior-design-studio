@@ -4,7 +4,7 @@ import uuid
 from django.db import models
 from django.utils.text import slugify
 
-from utils.image_utils import optimize_image_to_webp
+from utils.image_utils import OldImageDeletionMixin
 
 
 def post_image_path(article: "Article", filename: str) -> pathlib.Path:
@@ -25,7 +25,7 @@ def component_image_path(
     return pathlib.Path("upload/articles/components/") / new_file_name
 
 
-class Article(models.Model):
+class Article(models.Model, OldImageDeletionMixin):
     title = models.CharField(max_length=255)
     content = models.TextField()
     image = models.ImageField(upload_to=post_image_path)
@@ -45,12 +45,12 @@ class Article(models.Model):
         using=None,
         update_fields=None,
     ):
-        self.image = optimize_image_to_webp(self.image)
+        self.delete_replaced_image(Article, "image")
 
         return super().save(force_insert, force_update, using, update_fields)
 
 
-class ArticleComponent(models.Model):
+class ArticleComponent(models.Model, OldImageDeletionMixin):
     article = models.ForeignKey(
         Article,
         related_name="components",
@@ -75,7 +75,7 @@ class ArticleComponent(models.Model):
             using=None,
             update_fields=None,
     ):
-        self.image = optimize_image_to_webp(self.image)
+        self.delete_replaced_image(ArticleComponent, "image")
 
         return super().save(force_insert, force_update, using, update_fields)
 

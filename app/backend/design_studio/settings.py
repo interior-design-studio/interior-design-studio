@@ -30,11 +30,7 @@ SECRET_KEY = os.getenv("SECRET_KEY", "your-default-secret-key")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DEBUG", "False") == "True"
 
-# ALLOWED_HOSTS = ["*"] if DEBUG else ["localhost", "127.0.0.1"]
-# ALLOWED_HOSTS = ["172.166.90.117", "localhost", "127.0.0.1"]
-ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "localhost").split(",")
-FORCE_SCRIPT_NAME = os.getenv("FORCE_SCRIPT_NAME", "")
-# FORCE_SCRIPT_NAME = ""
+ALLOWED_HOSTS = [] if DEBUG else ["localhost", "127.0.0.1"]
 
 
 # Application definition
@@ -49,6 +45,8 @@ INSTALLED_APPS = [
     "rest_framework",
     "debug_toolbar",
     "drf_spectacular",
+    "nested_admin",
+    "consultations",
     "core",
     "blog",
     "user",
@@ -184,3 +182,9 @@ EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
 DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL", EMAIL_HOST_USER)
 ADMIN_NOTIFICATION_EMAIL = os.getenv("ADMIN_NOTIFICATION_EMAIL")
+
+CELERY_BROKER_URL = os.getenv("CELERY_BROKER_URL")
+CELERY_RESULT_BACKEND = os.getenv("CELERY_RESULT_BACKEND")
+CELERY_TIMEZONE = "Europe/Kyiv"
+CELERY_TASK_TRACK_STARTED = True
+CELERY_TASK_TIME_LIMIT = 30 * 60
