@@ -1,0 +1,32 @@
+.header {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 48px;
+  z-index: 1000;
+  padding-block: 8px;
+  background-color: rgba(225, 225, 225, 0.75);
+}
+
+.header__content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav__list {
+  margin-inline: 32px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.nav__link {
+  padding: 4px 8px;
+  color: #132323;
+}
+
+.nav__link--active {
+  border: 1px solid #4a6565;
+  border-left: none;
+}

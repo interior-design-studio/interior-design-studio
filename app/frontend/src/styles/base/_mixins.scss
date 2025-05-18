@@ -1,0 +1,29 @@
+@mixin heading(
+  $size,
+  $weight,
+  $line-height: normal,
+  $family: $font-family-decorative
+) {
+  font-size: $size;
+  font-weight: $weight;
+  line-height: $line-height;
+  font-family: $font-family-decorative;
+}
+
+@mixin text-style(
+  $size,
+  $weight,
+  $line-height: normal,
+  $family: $font-family-default
+) {
+  font-size: $size;
+  font-weight: $weight;
+  line-height: $line-height;
+  font-family: $family;
+}
+
+@mixin onDesktop {
+  @media (min-width: 1280px) {
+    @content;
+  }
+}

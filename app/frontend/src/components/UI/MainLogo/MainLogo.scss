@@ -1,0 +1,16 @@
+.main-logo {
+  display: block;
+  width: 96px;
+  height: 99px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.main-logo--header {
+  background-image: url('../../../assets/icons/main-logo-header.svg');
+}
+
+.main-logo--footer {
+  background-image: url('../../../assets/icons/main-logo-footer.svg');
+}

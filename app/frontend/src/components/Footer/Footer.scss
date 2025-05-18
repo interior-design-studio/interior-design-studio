@@ -1,0 +1,54 @@
+.footer {
+  background-color: #132323;
+}
+
+.footer__content {
+  padding: 32px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.footer__contacts {
+  gap: 8px;
+
+  & p {
+    color: #FAFAFA;
+  }
+
+  & a.email {
+    text-decoration: underline;
+  }
+}
+
+.footer__socials {
+  gap: 21px;
+
+  & a {
+    text-decoration: underline;
+  }
+}
+
+.footer__contacts, .footer__socials {
+  display: flex;
+  align-items: center;
+}
+
+.footer__contact, .footer__social {
+  color: #FAFAFA;
+}
+
+.mobile {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  line-height: 0;
+
+  &::before {
+    content: "";
+    display: block;
+    background-image: url('../../assets/icons/phone-icon.svg');
+    height: 24px;
+    width: 24px;
+  }
+}
