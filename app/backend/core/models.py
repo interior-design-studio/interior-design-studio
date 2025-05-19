@@ -5,8 +5,6 @@ from django.core.validators import MinValueValidator
 from django.db import models
 from django.utils.text import slugify
 
-from utils.image_utils import OldImageDeletionMixin
-
 
 def project_main_image_path(project: "Project", filename: str) -> pathlib.Path:
     filename_suffix = pathlib.Path(filename).suffix
@@ -47,7 +45,7 @@ class ProjectStyle(BaseNamedModel):
     pass
 
 
-class Project(models.Model, OldImageDeletionMixin):
+class Project(models.Model):
     name = models.CharField(max_length=255)
     short_description = models.CharField(max_length=255)
     full_description = models.TextField()
@@ -65,20 +63,8 @@ class Project(models.Model, OldImageDeletionMixin):
     def __str__(self) -> str:
         return self.name
 
-    def save(
-        self,
-        *args,
-        force_insert=False,
-        force_update=False,
-        using=None,
-        update_fields=None,
-    ):
-        self.delete_replaced_image(Project, "main_image")
 
-        return super().save(force_insert, force_update, using, update_fields)
-
-
-class ProjectImage(models.Model, OldImageDeletionMixin):
+class ProjectImage(models.Model):
     project = models.ForeignKey(
         Project,
         on_delete=models.CASCADE,
@@ -88,18 +74,6 @@ class ProjectImage(models.Model, OldImageDeletionMixin):
 
     def __str__(self) -> str:
         return f"{self.project.name} image"
-
-    def save(
-        self,
-        *args,
-        force_insert=False,
-        force_update=False,
-        using=None,
-        update_fields=None,
-    ):
-        self.delete_replaced_image(ProjectImage, "image")
-
-        return super().save(force_insert, force_update, using, update_fields)
 
 
 class Service(BaseNamedModel):
