@@ -1,0 +1,48 @@
+@import './_mixins';
+@import './_variables';
+
+.h1--bold {
+  @include heading($fs-h1, 700, $lh-135);
+}
+
+.h1--medium {
+  @include heading($fs-h1, 500, $lh-120);
+}
+
+.h2--medium {
+  @include heading($fs-h2, 500, $lh-120);
+}
+
+.h3--semibold {
+  @include heading($fs-h3, 600, $lh-130);
+}
+
+.h4--bold {
+  @include heading($fs-h4, 700, $lh-130);
+}
+
+.h4--regular {
+  @include heading($fs-h4, 400, $lh-130);
+}
+
+.button--text {
+  @include heading($fs-button, 700, $lh-120);
+}
+
+.button--text-underline {
+  @include heading($fs-button, 700, $lh-120);
+  text-decoration: underline;
+}
+
+.h4--underline {
+  @include text-style($fs-h4, 400, $lh-150);
+  text-decoration: underline;
+}
+
+.text-main--extrabold {
+  @include text-style($fs-main, 800, $lh-150);
+}
+
+.text-secondary--regular {
+  @include text-style($fs-secondary, 400, $lh-150);
+}

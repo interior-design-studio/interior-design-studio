@@ -1,5 +1,7 @@
 ## Hi there 👋
 
+link to project - https://paulmaistrenko.github.io/interior-design-studio/
+
 <!--
 **interior-design-studio/interior-design-studio** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 

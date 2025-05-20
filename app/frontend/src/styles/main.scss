@@ -1,0 +1,33 @@
+@import './base/_reset';
+@import './base/_variables';
+@import './base/_mixins';
+@import './base/_typography';
+@import './base/_grid';
+
+@import '../components/Header/Header';
+@import '../components/Footer/Footer';
+@import '../components/UI/MainLogo/MainLogo';
+@import '../pages/MainPage/MainPage';
+
+body {
+  @include text-style($fs-main, 400, $lh-150);
+  background-color: #FAFAFA;
+}
+
+.container {
+  margin: 0 auto;
+  padding-inline: 56px;
+  max-width: 1440px;
+}
+
+.bg-image {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
