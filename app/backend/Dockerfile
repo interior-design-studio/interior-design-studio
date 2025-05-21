@@ -3,7 +3,11 @@ LABEL maintainer="danilsivkovic@gmail.com"
 
 ENV PYTHONUNBUFFERED 1
 
+<<<<<<< HEAD
 WORKDIR app/backend/
+=======
+WORKDIR app/backend
+>>>>>>> backend
 
 COPY requirements.txt requirements.txt
 RUN pip install -r requirements.txt
@@ -20,3 +24,5 @@ RUN chown -R my_user /files/media
 RUN chmod -R 755 /files/media
 
 USER my_user
+
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]

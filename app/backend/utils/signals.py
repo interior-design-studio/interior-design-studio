@@ -1,5 +1,8 @@
-from django.db.models.signals import post_delete
+from django.db.models.signals import post_delete, post_save, pre_save
 from django.dispatch import receiver
+from django.db import transaction
+
+from blog.tasks import optimize_image_size_task, delete_image_task
 
 
 def register_image_cleanup(model, field_name: str):
@@ -9,3 +12,34 @@ def register_image_cleanup(model, field_name: str):
         file = getattr(instance, field_name, None)
         if file:
             file.delete(save=False)
+
+
+def delete_replaced_image_signal(model, field_name):
+
+    @receiver(pre_save, sender=model)
+    def delete_replaced_image(sender, instance, **kwargs):
+        try:
+            old_instance = model.objects.get(id=instance.pk)
+        except model.DoesNotExist:
+            return
+
+        old_image = getattr(old_instance, field_name)
+        new_image = getattr(instance, field_name)
+
+        if old_image and old_image != new_image:
+            old_path = old_image.path
+            transaction.on_commit(lambda: delete_image_task.delay(old_path))
+
+
+def optimize_image_size(model, field_name: str):
+    model_path = f"{model._meta.app_label}.{model.__name__}"
+
+    @receiver(post_save, sender=model)
+    def optimize_image_size_signal(sender, instance, **kwargs):
+        image = getattr(instance, field_name)
+        if image and not image.name.lower().endswith(".webp"):
+            transaction.on_commit(
+                lambda: optimize_image_size_task.delay(
+                    model_path, instance.pk, field_name
+                )
+            )

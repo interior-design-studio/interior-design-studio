@@ -4,8 +4,6 @@ import uuid
 from django.db import models
 from django.utils.text import slugify
 
-from utils.image_utils import OldImageDeletionMixin
-
 
 def post_image_path(article: "Article", filename: str) -> pathlib.Path:
     filename_suffix = pathlib.Path(filename).suffix
@@ -25,7 +23,7 @@ def component_image_path(
     return pathlib.Path("upload/articles/components/") / new_file_name
 
 
-class Article(models.Model, OldImageDeletionMixin):
+class Article(models.Model):
     title = models.CharField(max_length=255)
     content = models.TextField()
     image = models.ImageField(upload_to=post_image_path)
@@ -37,20 +35,8 @@ class Article(models.Model, OldImageDeletionMixin):
     def __str__(self) -> str:
         return self.title
 
-    def save(
-        self,
-        *args,
-        force_insert=False,
-        force_update=False,
-        using=None,
-        update_fields=None,
-    ):
-        self.delete_replaced_image(Article, "image")
 
-        return super().save(force_insert, force_update, using, update_fields)
-
-
-class ArticleComponent(models.Model, OldImageDeletionMixin):
+class ArticleComponent(models.Model):
     article = models.ForeignKey(
         Article,
         related_name="components",
@@ -66,18 +52,6 @@ class ArticleComponent(models.Model, OldImageDeletionMixin):
 
     def __str__(self) -> str:
         return self.title
-
-    def save(
-            self,
-            *args,
-            force_insert=False,
-            force_update=False,
-            using=None,
-            update_fields=None,
-    ):
-        self.delete_replaced_image(ArticleComponent, "image")
-
-        return super().save(force_insert, force_update, using, update_fields)
 
 
 class ComponentAdvantage(models.Model):

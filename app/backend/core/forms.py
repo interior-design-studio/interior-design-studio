@@ -1,8 +1,8 @@
+from django import forms
 from core.models import Project, ProjectImage
-from utils.image_utils import NewImageOptimizationFormMixin
 
 
-class ProjectAdminForm(NewImageOptimizationFormMixin):
+class ProjectAdminForm(forms.ModelForm):
     class Meta:
         model = Project
         fields = (
@@ -15,14 +15,8 @@ class ProjectAdminForm(NewImageOptimizationFormMixin):
             "main_image"
         )
 
-    def clean_main_image(self):
-        return self.optimize_new_image("main_image")
 
-
-class ProjectImageAdminForm(NewImageOptimizationFormMixin):
+class ProjectImageAdminForm(forms.ModelForm):
     class Meta:
         model = ProjectImage
         fields = ("image",)
-
-    def clean_image(self):
-        return self.optimize_new_image("image")

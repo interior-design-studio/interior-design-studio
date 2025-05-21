@@ -1,20 +1,14 @@
 from blog.models import Article, ArticleComponent
-from utils.image_utils import NewImageOptimizationFormMixin
+from django import forms
 
 
-class ArticleAdminForm(NewImageOptimizationFormMixin):
+class ArticleAdminForm(forms.ModelForm):
     class Meta:
         model = Article
         fields = ("title", "content", "image")
 
-    def clean_image(self):
-        return self.optimize_new_image("image")
 
-
-class ArticleComponentAdminForm(NewImageOptimizationFormMixin):
+class ArticleComponentAdminForm(forms.ModelForm):
     class Meta:
         model = ArticleComponent
         fields = ("number", "title", "description", "image")
-
-    def clean_image(self):
-        return self.optimize_new_image("image")
