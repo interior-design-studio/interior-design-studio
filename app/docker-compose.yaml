@@ -28,8 +28,6 @@ services:
     volumes:
       - my_db:$PGDATA
 
-<<<<<<< HEAD
-=======
   redis:
     image: redis:alpine
     ports:
@@ -52,7 +50,6 @@ services:
       - my_media:/app/media
     working_dir: /app/backend
 
->>>>>>> backend
 volumes:
   my_db:
   my_media:
