@@ -30,10 +30,7 @@ SECRET_KEY = os.getenv("SECRET_KEY", "your-default-secret-key")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DEBUG", "False") == "True"
 
-if DEBUG:
-    ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
-else:
-    ALLOWED_HOSTS = [host for host in os.getenv("ALLOWED_HOSTS").split(",")]
+ALLOWED_HOSTS = [host for host in os.getenv("ALLOWED_HOSTS").split(",")]
 raw_csrf = os.getenv("CSRF_TRUSTED_ORIGINS", "")
 CSRF_TRUSTED_ORIGINS = [h for h in raw_csrf.split(",") if h]
 
@@ -148,11 +145,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-STATIC_URL = "static/"
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+STATIC_URL = os.getenv("STATIC_URL", "/static/")
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
+MEDIA_URL = os.getenv("MEDIA_URL", "/media/")
 MEDIA_ROOT = BASE_DIR / "media"
-MEDIA_URL = "/media/"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
