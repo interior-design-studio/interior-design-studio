@@ -5,10 +5,10 @@ ENV PYTHONUNBUFFERED 1
 
 WORKDIR /app/backend/
 
-COPY requirements.txt requirements.txt
+COPY /app/backend/requirements.txt requirements.txt
 RUN pip install -r requirements.txt
 
-COPY . .
+COPY /app/backend/ .
 
 RUN mkdir -p /app/backend/staticfiles
 RUN mkdir -p /app/backend/media
