@@ -1,66 +1,66 @@
-name: Build and Push Frontend
+# name: Build and Push Frontend
 
-on:
-  push:
-  # issue_comment:
-  #   types: [created, deleted]
-    paths:
-      - 'app/frontend/**'
-    branches: [develop]
+# on:
+#   push:
+#   # issue_comment:
+#   #   types: [created, deleted]
+#     paths:
+#       - 'app/frontend/**'
+#     branches: [develop]
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    env:
-      IMAGE_NAME: tavrds/interior-design-frontend
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
+#     env:
+#       IMAGE_NAME: tavrds/interior-design-frontend
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v3
 
-      - name: Log in to DockerHub
-        run: echo "${{ secrets.DOCKERHUB_PASSWORD }}" | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
+#       - name: Log in to DockerHub
+#         run: echo "${{ secrets.DOCKERHUB_PASSWORD }}" | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
 
-      - name: Set Git SHA as image tag
-        run: echo "TAG=$(echo $GITHUB_SHA | cut -c1-7)" >> $GITHUB_ENV
+#       - name: Set Git SHA as image tag
+#         run: echo "TAG=$(echo $GITHUB_SHA | cut -c1-7)" >> $GITHUB_ENV
 
-      - name: Build and Push
-        run: |
-          docker build -t $IMAGE_NAME:${{ env.TAG }} ./app/frontend
-          docker push $IMAGE_NAME:${{ env.TAG }}
+#       - name: Build and Push
+#         run: |
+#           docker build -t $IMAGE_NAME:${{ env.TAG }} ./app/frontend
+#           docker push $IMAGE_NAME:${{ env.TAG }}
 
-      - name: Output tag
-        run:  |
-          echo "Pushed image: $IMAGE_NAME:${{ env.TAG }}"
+#       - name: Output tag
+#         run:  |
+#           echo "Pushed image: $IMAGE_NAME:${{ env.TAG }}"
 
-      - name: Checkout infra repo
-        uses: actions/checkout@v3
-        with:
-          repository: interior-design-studio/interior-design-infra
-          token: ${{ secrets.GH_INFRA_PAT }}
-          path: infra
+#       - name: Checkout infra repo
+#         uses: actions/checkout@v3
+#         with:
+#           repository: interior-design-studio/interior-design-infra
+#           token: ${{ secrets.GH_INFRA_PAT }}
+#           path: infra
 
-      - name: Update values.yaml with new tag
-        run: |
-          cd infra/terraform/helm/frontend
-          sed -i "s/^  tag: .*/  tag: ${TAG}/" values.yaml
+#       - name: Update values.yaml with new tag
+#         run: |
+#           cd infra/terraform/helm/frontend
+#           sed -i "s/^  tag: .*/  tag: ${TAG}/" values.yaml
 
-      - name: Commit and push changes
-        run: |
-          cd infra
-          git config user.name "GitHub Actions"
-          git config user.email "actions@github.com"
-          git checkout -b update-backend-image-${TAG}
-          git add terraform/helm/frontend/values.yaml
-          git commit -m "Update backend image tag to ${TAG}"
-          git push origin update-backend-image-${TAG}
+#       - name: Commit and push changes
+#         run: |
+#           cd infra
+#           git config user.name "GitHub Actions"
+#           git config user.email "actions@github.com"
+#           git checkout -b update-backend-image-${TAG}
+#           git add terraform/helm/frontend/values.yaml
+#           git commit -m "Update backend image tag to ${TAG}"
+#           git push origin update-backend-image-${TAG}
 
-      - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v5
-        with:
-          token: ${{ secrets.GH_INFRA_PAT }}
-          path: infra
-          commit-message: Update backend image tag to ${{ env.TAG }}
-          title: "Update backend image tag to ${{ env.TAG }}"
-          body: "This PR updates the backend image tag to `${{ env.TAG }}`."
-          base: main
+#       - name: Create Pull Request
+#         uses: peter-evans/create-pull-request@v5
+#         with:
+#           token: ${{ secrets.GH_INFRA_PAT }}
+#           path: infra
+#           commit-message: Update backend image tag to ${{ env.TAG }}
+#           title: "Update backend image tag to ${{ env.TAG }}"
+#           body: "This PR updates the backend image tag to `${{ env.TAG }}`."
+#           base: main
