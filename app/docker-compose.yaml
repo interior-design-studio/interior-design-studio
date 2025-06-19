@@ -30,8 +30,13 @@ services:
 
   redis:
     image: redis:alpine
+    container_name: redis
     ports:
       - "6379:6379"
+    volumes:
+      - ./redis/redis.conf:/usr/local/etc/redis/redis.conf
+    command: ["redis-server", "/usr/local/etc/redis/redis.conf"]
+    restart: unless-stopped
 
   celery:
     build:
@@ -66,9 +71,9 @@ services:
       - "443:443"
     volumes:
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
-      - certbot-etc:/etc/letsencrypt
-      - certbot-var:/var/lib/letsencrypt
-      - certbot-www:/var/www/certbot
+      - ./certbot/etc/letsencrypt:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
+      - ./certbot/var:/var/lib/letsencrypt
       - ./frontend/build:/usr/share/nginx/html
     depends_on:
       - frontend
@@ -76,21 +81,36 @@ services:
       sh -c "mkdir -p /var/www/certbot/.well-known/acme-challenge &&
              echo OK > /var/www/certbot/.well-known/acme-challenge/test &&
              exec nginx -g 'daemon off;'"
-
+    # sh -c "exec nginx -g 'daemon off;'"
   certbot:
     image: certbot/certbot
     container_name: certbot
     volumes:
-      - certbot-etc:/etc/letsencrypt
-      - certbot-var:/var/lib/letsencrypt
-      - certbot-www:/var/www/certbot
-    entrypoint: sh -c "certbot certonly --webroot --webroot-path=/var/www/certbot
-             --email interior.design.studio.projec@gmail.com --agree-tos --no-eff-email
-             -d tavrdesing.com.ua -d www.tavrdesing.com.ua"
+      - ./certbot/etc:/etc/letsencrypt
+      - ./certbot/var:/var/lib/letsencrypt
+      - ./certbot/www:/var/www/certbot
+    entrypoint: >
+      sh -c "trap exit TERM; while :; do
+      certbot renew --webroot -w /var/www/certbot --quiet;
+      sleep 24h & wait \$${!};
+      done"
+
+    # "/bin/sh -c 'sleep infinity'"
+  # одноразовий запуск сертбот для отримання сертифіката
+  # certbot:
+  #   image: certbot/certbot
+  #   container_name: certbot
+  #   volumes:
+  #     - certbot-etc:/etc/letsencrypt
+  #     - certbot-var:/var/lib/letsencrypt
+  #     - certbot-www:/var/www/certbot
+  #   entrypoint: sh -c "certbot certonly --webroot --webroot-path=/var/www/certbot
+  #            --email interior.design.studio.projec@gmail.com --agree-tos --no-eff-email
+  #            -d tavrdesing.com.ua -d www.tavrdesing.com.ua"
 
 volumes:
   my_db:
   my_media:
-  certbot-etc:
-  certbot-www:
-  certbot-var:
+  # certbot-etc:
+  # certbot-www:
+  # certbot-var:
