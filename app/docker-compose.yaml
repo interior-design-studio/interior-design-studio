@@ -17,6 +17,7 @@ services:
     depends_on:
       - db
     working_dir: /app/backend
+    restart: always
 
   db:
     image: postgres:16.0-alpine3.17
@@ -36,7 +37,7 @@ services:
     volumes:
       - ./redis/redis.conf:/usr/local/etc/redis/redis.conf
     command: ["redis-server", "/usr/local/etc/redis/redis.conf"]
-    restart: unless-stopped
+    restart: always
 
   celery:
     build:
@@ -54,6 +55,7 @@ services:
       - ./:/app
       - my_media:/app/media
     working_dir: /app/backend
+    restart: always
 
   frontend:
     build:
@@ -63,6 +65,7 @@ services:
       - "80"
     depends_on:
       - studio
+    restart: always
   nginx:
     image: nginx:alpine
     container_name: nginx-proxy
