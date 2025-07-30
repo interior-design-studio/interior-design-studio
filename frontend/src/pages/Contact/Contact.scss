@@ -1,0 +1,30 @@
+.contact-page {
+  padding: 179px 0 80px;
+
+  @include onMobile {
+    padding: 92px 0 24px;
+  }
+}
+
+.contact-page__title {
+  margin-bottom: 24px;
+  color: #132323;
+}
+
+.contact-page__text {
+  margin-bottom: 48px;
+  color: #344040;
+
+  @include onMobile {
+    margin-bottom: 27px;
+  }
+}
+
+.details__title {
+  margin-bottom: 56px;
+  text-align: center;
+
+  @include onMobile {
+    margin-bottom: 32px;
+  }
+}

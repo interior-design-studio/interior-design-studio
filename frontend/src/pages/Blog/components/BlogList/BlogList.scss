@@ -1,0 +1,12 @@
+.blogs-list {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 48px 16px;
+
+  @include onMobile {
+    flex-wrap: nowrap;
+    flex-direction: column;
+    gap: 16px;
+  }
+}

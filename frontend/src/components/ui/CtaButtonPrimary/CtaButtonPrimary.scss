@@ -1,0 +1,43 @@
+.cta-button-primary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 2px;
+  background-color: $accent-color;
+  color: $white;
+  transition: all 0.4s ease;
+
+  &__arrow-type {
+    & span::after {
+      content: '';
+      display: flex;
+      width: 24px;
+      height: 24px;
+      background-image: url('../../../assets/icons/secondary-button-arrow-right.svg');
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: contain;
+    }
+  }
+
+  & span {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  &:hover {
+    background-color: $hover-color;
+    color: $white;
+  }
+}
+
+.small-button {
+  width: 207px;
+  height: 48px;
+}
+
+.large-button {
+  width: 320px;
+  height: 56px;
+}

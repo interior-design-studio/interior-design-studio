@@ -1,0 +1,36 @@
+@import '../../../styles/abstracts/_variables';
+
+.section-header {
+  margin-bottom: 50px;
+  color: $gray-80;
+
+  @include onMobile {
+    margin-bottom: 12px;
+  }
+}
+
+.section-header__content-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid $gray-40;
+
+  @include onMobile {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+.section-header__title {
+
+  @include onMobile {
+    margin-bottom: 16px;
+  }
+}
+
+.section-header__slogan {
+
+  @include onMobile {
+    margin-bottom: 4px;
+  }
+}

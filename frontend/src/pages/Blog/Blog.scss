@@ -1,0 +1,13 @@
+.blog-page {
+  padding: 179px 0 80px;
+
+  @include onMobile {
+    padding: 108px 0 32px;
+  }
+
+  & .section-header {
+    @include onMobile {
+      margin-bottom: 30px;
+    }
+  }
+}

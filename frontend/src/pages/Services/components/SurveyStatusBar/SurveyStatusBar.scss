@@ -1,0 +1,80 @@
+.survey-status-bar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 24px 0 56px;
+
+  @include onMobile {
+    padding: 24px 0 24px;
+    justify-content: center;
+  }
+}
+
+.survey-steps-status__list {
+  display: flex;
+}
+
+.survey-prev-step__button {
+  position: absolute;
+  left: -90px;
+  display: block;
+  width: 48px;
+  height: 48px;
+  background-image: url('../../../../assets/icons/survey-back-button.svg');
+
+  @include onMobile {
+    left: 14px;
+  }
+}
+
+.survey-steps-status__dot {
+  width: 62px;
+  height: 32px;
+  background-image: url('../../../../assets/icons/survey-step.svg');
+
+  &.active {
+    background-image: url('../../../../assets/icons/survey-step-active.svg');
+  }
+
+  &.completed {
+    background-image: url('../../../../assets/icons/survey-step-completed.svg');
+  }
+
+  @include onMobile {
+    width: 22px;
+    height: 24px;
+    background-image: url('../../../../assets/icons/survey-step-mobile.svg');
+
+    &.active {
+      background-image: url('../../../../assets/icons/survey-step-active-mobile.svg');
+    }
+
+    &.completed {
+      background-image: url('../../../../assets/icons/survey-step-completed-mobile.svg');
+    }
+  }
+}
+
+.grey-point {
+  width: 20px;
+  height: 20px;
+  background-image: url('../../../../assets/icons/last-step-grey-point.svg');
+
+  @include onMobile {
+    background-image: url('../../../../assets/icons/last-step-grey-point-mobile.svg');
+    width: 11px;
+    height: 11px;
+  }
+}
+
+.red-circle-point {
+  width: 20px;
+  height: 20px;
+  background-image: url('../../../../assets/icons/survey-step-red-circle.svg');
+
+  @include onMobile {
+    background-image: url('../../../../assets/icons/survey-step-red-circle-mobile.svg');
+    width: 11px;
+    height: 11px;
+  }
+}

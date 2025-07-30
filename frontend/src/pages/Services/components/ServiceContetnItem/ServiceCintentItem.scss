@@ -1,0 +1,8 @@
+.service-content__item {
+  list-style: disc;
+  color: $gray-80;
+
+  &::marker {
+    color: $gray-80;
+  }
+}

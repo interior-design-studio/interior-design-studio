@@ -1,0 +1,21 @@
+.services-survey__content {
+  background-color: $white;
+}
+
+.services-survey__poster {
+  height: 600px;
+  background-image: url('../../../../assets/images/Services/survey-poster.png');
+
+  @include onMobile {
+    height: 215px;
+  }
+}
+
+.services-survey__info {
+  display: flex;
+  flex-direction: column;
+
+  @include onMobile {
+    padding-bottom: 24px;
+  }
+}

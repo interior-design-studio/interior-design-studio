@@ -1,0 +1,13 @@
+.filters-block, .filters {
+  display: flex;
+  align-items: center;
+}
+
+.filters-block {
+  margin-bottom: 24px;
+  justify-content: space-between;
+}
+
+.filters {
+  gap: 16px;
+}

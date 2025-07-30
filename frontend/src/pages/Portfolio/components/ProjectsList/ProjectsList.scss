@@ -1,0 +1,11 @@
+.projects-list {
+  margin-bottom: 56px;
+  row-gap: 32px;
+
+  @include onMobile {
+    margin-bottom: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+}

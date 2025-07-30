@@ -1,0 +1,44 @@
+.next-survey-step-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: flex-end;
+  width: 208px;
+  height: 48px;
+  background-color: $accent-color;
+  color: $white;
+
+  @include onMobile {
+    width: 150px;
+    height: 44px;
+  }
+}
+
+.next-survey-step-button p {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+
+  &::after {
+    left: 65px;
+    content: '';
+    display: block;
+    width: 24px;
+    height: 24px;
+    background-image: url('../../../../assets/icons/project-link-arrow-right.svg');
+    background-position: center;
+    background-size: contain;
+  }
+}
+
+.next-survey-step-button--disabled {
+  color: $gray-70;
+  background-color: $disabled-color;
+}
+
+.next-survey-step-button--disabled p {
+  &::after {
+    background-image: url('../../../../assets/icons/arrow-narrow-right-disabled.svg');
+  }
+}

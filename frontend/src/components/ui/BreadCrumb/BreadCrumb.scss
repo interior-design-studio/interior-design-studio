@@ -1,0 +1,26 @@
+.breadcrumb {
+  margin-bottom: 56px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.breadcrumb .main-page__link {
+  text-decoration: underline;
+  color: $gray-70;
+}
+
+.breadcrumb__item {
+  display: flex;
+  align-items: center;
+}
+
+.breadcrumb__separator {
+  width: 24px;
+  height: 24px;
+  background-image: url('../../../assets/icons/breadcrumb-separator.svg');
+}
+
+.current-page {
+  color: $gray-100;
+}

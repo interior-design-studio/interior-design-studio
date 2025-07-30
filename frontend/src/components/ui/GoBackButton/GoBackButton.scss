@@ -1,0 +1,23 @@
+.go-back-button {
+  padding: 8px;
+  margin-bottom: 16px;
+}
+
+.go-back-button p {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: underline;
+  color: $gray-100;
+
+  &::before {
+    content: "";
+    display: block;
+    width: 24px;
+    height: 24px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-image: url('../../../assets/icons/arrow-narrow-left.svg');
+  }
+}

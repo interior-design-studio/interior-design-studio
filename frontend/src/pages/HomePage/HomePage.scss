@@ -1,0 +1,148 @@
+@import '../../styles/abstracts/_variables';
+
+.home__hero-section {
+  padding: 243px 0 397px;
+  margin-bottom: 80px;
+  height: 900px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-image: url('../../assets/images/HomePage/main-poster.png');
+
+  @include onMobile {
+    padding: 140px 0 123px;
+    margin-bottom: 32px;
+  }
+}
+
+.home__hero-section-title {
+  margin-bottom: 40px;
+  text-align: center;
+  font-size: 64px;
+  line-height: 135%;
+  font-weight: 800;
+  color: $gray-100;
+
+  @include onMobile {
+    font-size: 20px;
+    line-height: 120%;
+  }
+}
+
+.home__about-section {
+  margin-bottom: 80px;
+  color: $gray-80;
+
+  @include onMobile {
+    margin-bottom: 50px;
+  }
+}
+
+.about-section__top {
+  margin-bottom: 80px;
+
+  @include onMobile {
+    margin-bottom: 24px;
+  }
+}
+
+.about-section__top .about-poster-1 {
+  margin-bottom: 16px;
+}
+
+.about-section-top__slogan {
+  @include onMobile {
+    margin-bottom: 16px;
+  }
+}
+
+.about-section__bottom {
+  row-gap: 40px;
+
+  & article {
+    margin-bottom: 12px;
+  }
+}
+
+.about-poster-1 {
+  height: 508px;
+  background-image: url('../../assets/images/HomePage/about-section/poster-1.png');
+  grid-row: 1/5;
+}
+
+.about-poster-2 {
+  background-image: url('../../assets/images/HomePage/about-section/poster-2.png');
+  grid-row: 2/5;
+
+  @include onMobile {
+    height: 249px;
+  }
+}
+
+.article__title {
+  margin-bottom: 8px;
+}
+
+.about-section__top .about-section__text {
+  padding-inline: 56px;
+  text-align: center;
+  grid-row: 3/5;
+
+  @include onMobile {
+    padding-inline: 0;
+    margin-bottom: 16px;
+    text-align: start;
+  }
+}
+
+.about-section__title {
+  @include onMobile {
+    margin-bottom: 12px;
+  }
+}
+
+.article__title {
+  @include onMobile {
+    margin-bottom: 4px;
+  }
+}
+
+.home__services-section {
+  margin-bottom: 80px;
+
+  @include onMobile {
+    margin-bottom: 32px;
+  }
+}
+
+.home__services-list {
+  @include onMobile {
+    margin-bottom: 35px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+}
+
+.home__projects-section {
+  margin-bottom: 80px;
+  @include onMobile {
+    margin-bottom: 32px;
+  }
+}
+
+.home__projects-list {
+  margin-bottom: 48px;
+  display: flex;
+  gap: 16px;
+
+  @include onMobile {
+    margin-bottom: 24px;
+    flex-direction: column;
+    gap: 16px;
+  }
+}
+
+.projects-item {
+  flex: 1;
+}

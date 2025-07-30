@@ -1,0 +1,47 @@
+.service-top {
+  padding-block: 24px;
+  background: linear-gradient(to top, $gray-40 0%, $gray-10 100%);
+}
+
+.service-bottom {
+  padding-top: 50px;
+  padding-bottom: 24px;
+
+  @include onMobile {
+    padding-bottom: 50px;
+  }
+}
+
+.service .service-top {
+  margin-bottom: 32px;
+}
+
+.service-top__content-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.service-price__button {
+  height: 56px;
+  width: 320px;
+  color: $gray-100;
+  border-radius: 2px;
+  border: 3px solid $accent-color;
+  background: $white;
+}
+
+.service__title {
+  color: $gray-80;
+}
+
+.service-price,
+.service-min-price {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.service-price {
+  margin-bottom: 16px;
+}

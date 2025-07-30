@@ -1,0 +1,89 @@
+.h1--bold {
+  @include heading($fs-h1, 700, $lh-135);
+
+  @include onMobile {
+    font-size: 24px;
+  }
+}
+
+.h1--medium {
+  @include heading($fs-h1, 500, $lh-120);
+
+  @include onMobile {
+    font-size: 24px;
+  }
+}
+
+.h2--medium {
+  @include heading($fs-h2, 500, $lh-120);
+
+  @include onMobile {
+    font-size: 22px;
+  }
+}
+
+.h2--bold {
+  @include heading($fs-h2, 700, $lh-120);
+
+  @include onMobile {
+    font-size: 22px;
+    line-height: 130%;
+  }
+}
+
+.h3--semibold {
+  @include heading($fs-h3, 600, $lh-130);
+  @include onMobile {
+    font-size: 20px;
+  }
+}
+
+.h4--bold {
+  @include heading($fs-h4, 700, $lh-130);
+
+  @include onMobile {
+    font-size: 18px;
+  }
+}
+
+.h4--regular {
+  @include heading($fs-h4, 400, $lh-130);
+
+  @include onMobile {
+    font-size: 18px;
+  }
+}
+
+.button--text {
+  @include heading($fs-button, 700, $lh-120);
+
+  @include onMobile {
+    font-size: 14px;
+  }
+}
+
+.button--text-underline {
+  @include heading($fs-button, 700, $lh-120);
+  text-decoration: underline;
+
+  @include onMobile {
+    font-size: 14px;
+  }
+}
+
+.h4--underline {
+  @include text-style($fs-h4, 400, $lh-150);
+  text-decoration: underline;
+}
+
+.text-main--extrabold {
+  @include text-style($fs-main, 800, $lh-150);
+}
+
+.text-secondary--regular {
+  @include text-style($fs-secondary, 400, $lh-150);
+
+  @include onMobile {
+    font-size: 14px;
+  }
+}

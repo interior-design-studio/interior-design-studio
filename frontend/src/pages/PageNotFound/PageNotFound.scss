@@ -1,0 +1,22 @@
+.page-not-found {
+  padding: 211px 0 112px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 140px;
+}
+
+.page-not-found__text-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  color: $gray-80;
+}
+
+.display-status {
+  font-size: 200px;
+  line-height: 135%;
+  font-weight: 300;
+  color: $gray-100;
+}

@@ -1,0 +1,25 @@
+.survey-step-2__types-list {
+  margin-bottom: 104px;
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 32px;
+
+  @include onMobile {
+    row-gap: 8px;
+  }
+}
+
+.survey-step-2__types-item label {
+  padding: 8px 0 8px 8px;
+  width: 208px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: $gray-80;
+}
+
+.survey-step-2__input {
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+}

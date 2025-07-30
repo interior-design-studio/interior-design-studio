@@ -1,0 +1,46 @@
+.cta-section {
+  padding-block: 32px;
+  background-color: $gray-20;
+
+  @include onMobile {
+    padding-block: 16px;
+  }
+}
+
+.cta-section__poster {
+  height: 306px;
+  background-image: url('../../../assets/images/components/cta-poster.png');
+
+  @include onMobile {
+    margin-bottom: 16px;
+    height: 162px;
+  }
+}
+
+.cta-section__text-content, .cta-section__content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+
+  @include onMobile {
+    align-items: flex-start;
+  }
+}
+
+.cta-section__title {
+  margin-bottom: 24px;
+  color: $primary-color;
+
+  @include onMobile {
+    font-size: 22px;
+  }
+}
+
+.cta-section__text {
+  margin-bottom: 137px;
+  color: $gray-80;
+
+  @include onMobile {
+    margin-bottom: 24px;
+  }
+}

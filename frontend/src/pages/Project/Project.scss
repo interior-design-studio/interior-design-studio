@@ -1,0 +1,94 @@
+.project-page {
+  padding: 171px 0 80px;
+
+  @include onMobile {
+    padding: 92px 0 0;
+  }
+}
+
+.project-title {
+  margin-bottom: 16px;
+  text-align: center;
+  color: $gray-100;
+
+  @include onMobile {
+    margin-bottom: 4px;
+  }
+}
+
+.project-features-list {
+  margin: 0 auto 40px;
+  width: max-content;
+  display: flex;
+  align-items: center;
+  gap: 7.5px;
+
+  @include onMobile {
+    margin: 0 auto 16px;
+  }
+}
+
+.project-feature {
+  color: $gray-60;
+
+  @include onMobile {
+    font-size: 12px;
+  }
+}
+
+.project-feature:not(:last-child) {
+  display: flex;
+  align-items: center;
+  &::after {
+    content: '';
+    display: inline-block;
+    margin-left: 7.5px;
+    width: 1px;
+    height: 17px;
+    background-image: url('../../assets/icons/project-feature-separator.svg');
+  }
+}
+
+.project-description {
+  display: flex;
+  align-items: center;
+  padding-left: 12px;
+  border-left: 2px solid $gray-70;
+  min-height: 225px;
+  color: $gray-100;
+}
+
+.project__main-poster {
+  position: absolute;
+  right: -128px;
+  top: 0;
+  width: 883px;
+  height: 600px;
+
+  @include onMobile {
+    margin-bottom: 16px;
+    height: 213px;
+    width: auto;
+    position: static;
+  }
+}
+
+.project-gallery__list {
+  padding-block: 56px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px 16px;
+
+  @include onMobile {
+    padding-block: 24px;
+  }
+}
+
+.project-gallery__item {
+  width: 648px;
+  height: 437px;
+
+  @include onMobile {
+    height: 192px;
+  }
+}

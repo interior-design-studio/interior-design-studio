@@ -1,0 +1,64 @@
+body {
+  @include text-style($fs-main, 400, $lh-150);
+  background-color: $gray-10;
+
+  @include onMobile {
+    font-size: 16px;
+    line-height: 150%;
+  }
+}
+
+.container {
+  padding-inline: 16px;
+  max-width: 1440px;
+  margin: 0 auto;
+
+  @include onDesktop {
+    padding-inline: 56px;
+  }
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 2px;
+}
+
+.bg-image {
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.flex-block-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.centered-block {
+  width: max-content;
+  margin: 0 auto;
+}
+
+.image-hover-grayscale {
+  filter: grayscale(100%);
+  transition: all 0.4s ease;
+
+  @include onMobile {
+    filter: grayscale(0%);
+  }
+}
+
+.image-hover-grayscale:hover {
+  transform: scale(1.03);
+  filter: grayscale(0%);
+}
+
+.image-hover-scale {
+  transition: all 0.4s ease;
+}
+
+.image-hover-scale:hover {
+  transform: scale(1.03);
+}

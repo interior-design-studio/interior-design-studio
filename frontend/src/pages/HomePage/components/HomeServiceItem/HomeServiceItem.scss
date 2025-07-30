@@ -1,0 +1,66 @@
+.home-services-item {
+  margin-bottom: 48px;
+  padding-bottom: 24px;
+  border-bottom: 2px solid $gray-40;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  @include onDesktop {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  @include onMobile {
+    margin-bottom: 0;
+    padding-bottom: 8px;
+    flex-direction: column;
+  }
+}
+
+.service-article {
+  width: 432px;
+
+  @include onMobile {
+    width: 100%;
+  }
+}
+
+.service-article__title {
+  margin-bottom: 16px;
+  color: $accent-color;
+
+  @include onMobile {
+    margin-bottom: 8px;
+  }
+}
+
+.service-article__description {
+  color: $gray-80;
+
+  @include onMobile {
+    margin-bottom: 8px;
+  }
+}
+
+.home-services__poster {
+  height: 243px;
+
+  @include onDesktop {
+    width: 432px;
+  }
+}
+
+.service-article__poster-1 {
+  background-image: url('../../../../assets/images/HomePage/services-section/poster-1.png');
+}
+
+.service-article__poster-2 {
+  background-image: url('../../../../assets/images/HomePage/services-section/poster-2.png');
+}
+
+.service-article__poster-3 {
+  background-image: url('../../../../assets/images/HomePage/services-section/poster-3.png');
+}

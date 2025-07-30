@@ -1,0 +1,75 @@
+.contact-form {
+  margin-bottom: 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+
+  @include onMobile {
+    margin-bottom: 48px;
+    gap: 20px;
+  }
+}
+
+.form-group {
+  & input,
+  textarea {
+    padding-left: 16px;
+    width: 100%;
+    background-color: $white;
+  }
+
+  & textarea {
+    padding-top: 8px;
+    resize: none;
+
+    @include onMobile {
+      margin-bottom: 46px;
+    }
+  }
+}
+
+input::placeholder {
+  color: $gray-60;
+}
+
+textarea::placeholder {
+  color: $gray-60;
+}
+
+.name-input {
+  height: 56px;
+
+  @include onMobile {
+    height: 44px;
+  }
+}
+
+.phone-input {
+  height: 56px;
+
+  @include onMobile {
+    height: 44px;
+  }
+}
+
+.message-input {
+  height: 254px;
+
+  @include onMobile {
+    height: 180px;
+  }
+}
+
+.submit-button {
+  margin-left: auto;
+  height: 48px;
+  width: 208px;
+  background-color: $accent-color;
+  color: $white;
+  transition: all 0.4s ease;
+
+  &:hover {
+    background-color: $hover-color;
+    color: $white;
+  }
+}

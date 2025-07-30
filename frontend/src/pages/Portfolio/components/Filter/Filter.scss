@@ -1,0 +1,56 @@
+.filter__toggle {
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 208px;
+  height: 40px;
+  background-color: $accent-color;
+  color: $white;
+
+  &::after {
+    content: "";
+    display: block;
+    width: 24px;
+    height: 24px;
+    background-image: url('../../../../assets/icons/chevron-up.svg');
+    transform: rotate(180deg);
+  }
+}
+
+.filter__toggle--is-open {
+  &::after {
+    transform: rotate(0);
+  }
+}
+
+.filter__options {
+  width: 208px;
+  position: absolute;
+  background-color: $gray-10;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.25));
+  border-radius: 0 0 2px 2px;
+  z-index: 100;
+}
+
+.filter__option {
+  padding-inline: 12px;
+
+  & label {
+    padding-block: 12px;
+    display: flex;
+    gap: 8px;
+  }
+
+  & input {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+  }
+}
+
+.filter__option:not(:last-child) {
+  & label {
+    border-bottom: 0.5px solid $gray-40;
+  }
+}

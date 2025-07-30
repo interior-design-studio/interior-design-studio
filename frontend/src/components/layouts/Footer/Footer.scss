@@ -1,0 +1,121 @@
+@import '../../../styles/abstracts/_mixins';
+
+.footer {
+  padding-block: 24px;
+  background-color: $gray-100;
+
+  @include onDesktop {
+    padding-block: 24px;
+  }
+}
+
+.footer__nav-bar {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+
+  @include onDesktop {
+    flex-direction: row;
+  }
+}
+
+.footer-contacts__wrapper {
+  display: flex;
+  flex-direction: column;
+
+  @include onDesktop {
+    flex-direction: row;
+  }
+}
+
+.footer__contact-list {
+  display: flex;
+
+  @include onDesktop {
+    gap: 8px;
+    flex-direction: row;
+  }
+}
+
+.footer__contact-list--column {
+  flex-direction: column;
+
+  @include onDesktop {
+    flex-direction: row;
+  }
+}
+
+.footer__contact-list--row {
+  flex-direction: row;
+
+  @include onMobile {
+    gap: 24px;
+  }
+}
+
+.footer__nav-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.footer__nav-link {
+  transition: all 0.3s ease-in-out;
+
+  @include onMobile {
+    padding-block: 12px;
+    text-decoration: underline !important;
+  }
+
+  @include onDesktop {
+    padding: 11px 16px;
+  }
+
+  &:hover {
+    color: $logo-secondary-color-dark;
+    filter: drop-shadow(0 0 1px #00ffff) drop-shadow(0 0 15px #00ffff);
+  }
+}
+
+.footer__nav-link,
+.footer__contacts-separator {
+  color: $gray-10;
+}
+
+.footer__contacts-separator {
+  display: none;
+  width: 1px;
+  height: 40px;
+  background-color: $gray-10;
+
+  @include onDesktop {
+    display: block;
+  }
+}
+
+.footer__nav-link--underline {
+  text-decoration: underline !important;
+}
+
+.footer__nav-item .phone {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  line-height: 0;
+
+  &::before {
+    content: '';
+    display: block;
+    background-image: url('../../../assets/icons/phone-icon-light.svg');
+    height: 24px;
+    width: 24px;
+    transition: all 0.3s ease-in-out;
+  }
+
+  &:hover {
+    &::before {
+      filter: drop-shadow(0 0 1px #00ffff) drop-shadow(0 0 15px #00ffff);
+      background-image: url('../../../assets/icons/phone-icon-light-green.svg');
+    }
+  }
+}

@@ -1,0 +1,72 @@
+@import './abstracts/_variables';
+@import './abstracts/_mixins';
+@import './base/reset';
+@import './base/_typography';
+@import './base/_global';
+@import './layout/_grid';
+
+@import '../pages/HomePage/HomePage.scss';
+@import '../pages/HomePage/components/HomeServiceItem/HomeServiceItem.scss';
+
+@import '../pages/Services/Services.scss';
+@import '../pages/Services/components/ServiceContentList/ServiceContentList.scss';
+@import '../pages/Services/components/ServiceContetnItem/ServiceCintentItem.scss';
+@import '../pages/Services/components/ServicesItem/ServicesItem.scss';
+@import '../pages/Services/components/ServicesList/ServicesList.scss';
+@import '../pages/Services/components/ServicesSurvey/ServicesSurvey.scss';
+@import '../pages/Services/components/SurveyStartForm/SurveyStartForm.scss';
+@import '../pages/Services/components/SurveyQuestionsList/SurveyQuestionsList.scss';
+@import '../pages/Services/components/SurveyStatusBar/SurveyStatusBar.scss';
+@import '../pages/Services/components/NextSurveyStepButton/NextSurveyStepButton.scss';
+@import '../pages/Services/components/SurveySteps/SurveyStep1/SurveyStep1.scss';
+@import '../pages/Services/components/SurveySteps/SurveyStep2/SurveyStep2.scss';
+@import '../pages/Services/components/SurveySteps/SurveyStep3/SurveyStep3.scss';
+@import '../pages/Services/components/SurveySteps/SurveyStep4/SurveyStep4.scss';
+@import '../pages/Services/components/SurveySteps/SurveyStep5/SurveyStep5.scss';
+@import '../pages/Services/components/SurveySteps/SurveyStep6/SurveyStep6.scss';
+@import '../pages/Services/components/SurveySteps/SurveyStep7/SurveyStep7.scss';
+@import '../pages/Services/components/SurveySteps/SurveyStep8/SurveyStep8.scss';
+@import '../pages/Services/components/SurveySteps/SurveyStep9/SurveyStep9.scss';
+@import '../pages/Services/components/ResultActions/ResultActions.scss';
+@import '../pages/Services/components/BookingButton/BookingButton.scss';
+@import '../pages/Services/components/BonusInfo/BonusInfo.scss';
+
+@import '../pages/Portfolio/Portfolio.scss';
+@import '../pages/Portfolio/components/Filters/Filters.scss';
+@import '../pages/Portfolio/components/Filter/Filter.scss';
+@import '../pages/Portfolio/components/ProjectsList/ProjectsList.scss';
+@import '../pages/Portfolio/components/MobileOpenFiltersButton/MobileFiltersOpenButton.scss';
+
+@import '../pages/Project/Project.scss';
+
+@import '../pages/BlogPost/BlogPost.scss';
+@import '../pages/BlogPost/components/BlogPostItem/BlogPostItem.scss';
+@import '../pages/BlogPost/components/BlogPostCtaSection/BlogPostCtaSection.scss';
+
+@import '../pages/Blog/Blog.scss';
+@import '../pages/Blog/components/BlogList/BlogList.scss';
+@import '../pages/Blog/components/BlogCard/BlogCard.scss';
+
+@import '../pages/Contact/Contact.scss';
+@import '../pages/Contact/components/ContactForm/ContactForm.scss';
+@import '../pages/Contact/components/ContactInfo/ContactInfo.scss';
+
+@import '../pages/MobileMenu/MobileMenu.scss';
+
+@import '../pages/MobileFilters/MobileFilters.scss';
+
+@import '../pages/PageNotFound/PageNotFound.scss';
+
+
+@import '../components/layouts/Header/Header.scss';
+@import '../components/layouts/Footer/Footer.scss';
+@import '../components/ui/MainLogo/MainLogo.scss';
+@import '../components/ui/SectionHeader/SectionHeader.scss';
+@import '../components/ui/CtaButtonPrimary/CtaButtonPrimary.scss';
+@import '../components/ui/CtaButtonSecondary/CtaButtonSecondary.scss';
+@import '../components/ui/ProjectCard/ProjectCard.scss';
+@import '../components/ui/BreadCrumb/BreadCrumb.scss';
+@import '../components/ui/CtaSection/CtaSection.scss';
+@import '../components/ui/BurgerButton/BurgerButton.scss';
+@import '../components/ui/GoBackButton/GoBackButton.scss';
+@import '../components/ui/FiltersResetButton/FiltersResetButton.scss';

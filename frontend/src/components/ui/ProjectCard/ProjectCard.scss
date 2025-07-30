@@ -1,0 +1,54 @@
+.project-card {
+  position: relative;
+  height: 437px;
+
+  @include onMobile {
+    height: 192px;
+  }
+}
+
+.project-card__link {
+  padding: 16px 32px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  backdrop-filter: blur(3px);
+  transition: all 0.4s ease;
+
+  &:hover {
+    backdrop-filter: blur(10px);
+  }
+
+  @include onMobile {
+    padding: 8px 16px;
+  }
+}
+
+.project-card__text-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: $white;
+
+  &::after {
+    content: '';
+    display: block;
+    width: 32px;
+    height: 32px;
+    background-image: url('../../../assets/icons/project-link-arrow-right.svg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+}
+
+.project-card__short-description {
+  margin-top: 4px;
+  color: $white;
+
+  @include onMobile {
+    width: 208px;
+    font-size: 14px;
+  }
+}

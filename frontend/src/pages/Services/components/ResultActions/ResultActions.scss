@@ -1,0 +1,28 @@
+.result-actions {
+  display: flex;
+  gap: 16px;
+
+  & button {
+    width: 207px;
+    height: 56px;
+
+    @include onMobile {
+      width: 140px;
+      height: 44px;
+    }
+  }
+
+  @include onMobile {
+    justify-content: center;
+  }
+}
+
+.result-button {
+  border: 2px solid $accent-color;
+  color: $gray-100;
+}
+
+.consultation-button {
+  color: $white;
+  background-color: $accent-color;
+}

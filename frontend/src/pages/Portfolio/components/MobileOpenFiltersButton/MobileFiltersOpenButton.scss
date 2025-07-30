@@ -1,0 +1,16 @@
+.mobile-filters-button {
+  padding: 8px;
+  width: 115px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &::after {
+    content: "";
+    display: block;
+    width: 24px;
+    height: 24px;
+    background-image: url('../../../../assets/icons/chevron-down.svg');
+  }
+}
